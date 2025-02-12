@@ -6,7 +6,12 @@ const userSchema = new mongoose.Schema ({
     email : {type:String},
     password : {type:String},
     phone : {type:Number},
-    token : {type:String}
+    token : {type:String},
+    verify: {
+        type: Boolean,
+        default: false
+    },
+    code: {type: String},
 
 },baseOptions)
 userSchema.pre("save", async function(){

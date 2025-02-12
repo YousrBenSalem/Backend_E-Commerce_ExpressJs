@@ -2,7 +2,16 @@ const productController = require ("../controller/productController")
 /* const authentificationToken = require("../middleWare/authenticateToken") */
 const route = require ("express").Router()
 const upload = require ("../middleWare/upload")
-route.post("/add",upload.array("image"),productController.createProduct)
+const validateAttribut = require ("../middleWare/validate")
+const authentificationToken = require("../middleWare/authenticateToken")
+
+
+
+
+
+
+
+route.post("/add",authentificationToken,upload.array("image"),validateAttribut(["description","gallery","price","ref","quantity"]) , productController.createProduct)
 route.get("/get",productController.getAllProducts)
 route.get("/get/:id",productController.getProductById)
 route.delete("/delete/:id",productController.deleteProduct)

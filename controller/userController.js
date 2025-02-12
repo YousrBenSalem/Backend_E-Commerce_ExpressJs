@@ -4,6 +4,7 @@ const jwt = require ("jsonwebtoken")
 const nodemailer = require ("nodemailer")
 const accessKey = process.env.rtoken
 const refreshKey = process.env.ftoken
+const { join } = require('path');
 const generateAccessToken = (user)=>{
     return jwt.sign({id:user.id},accessKey,{expiresIn:"10m"})
 }
@@ -14,6 +15,18 @@ let refreshTokens = []
 
 module.exports = {
 
+ verify : async (req, res) => {
+    try {
+        const verifyCode = await userModel.findOne({ code: req.params.code });
+        verifyCode.code = undefined;//supprimer
+        verifyCode.verify = true;
+        verifyCode.save();
+        return res.sendFile(join(__dirname + "../../template/sucess.html"));
+    } catch (err) {
+
+        return res.sendFile(join(__dirname + "../../template/error.html"));
+    }
+},
 
 login : async (req,res) => {
     try {
