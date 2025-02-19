@@ -38,6 +38,12 @@ app.use("/customer",customerRouter)
 const userRouter = require ("./router/userRouter")
 app.use("/user",userRouter)
 
+
+app.get('/:img',(req,res)=>{
+    res.sendFile(__dirname+"/storage/"+req.params.img)
+})
+
+
 app.listen(port,function(){
     console.log(`the server is running with ${process.env.PORT} open at http://localhost:${process.env.PORT}`)
 })

@@ -7,10 +7,6 @@ const validateAttribut = (fields) => {
                 return param('id')
                     .notEmpty().withMessage({ name: "id", message: "L'ID est requis" })
                     .isInt({ min: 1 }).withMessage({ name: "id", message: "L'ID doit être un entier positif" }); 
-          /*   case "name":
-                return body('name')
-                    .notEmpty().withMessage({ name: "name", message: "Le nom ne doit pas être vide" })
-                    .isLength({ min: 3 }).withMessage({ name: "name", message: "Le nom doit contenir au moins 3 caractères" }); */
             case "price":
                 return body('price')
                     .notEmpty().withMessage({ name: "price", message: "Le prix ne doit pas être vide" })

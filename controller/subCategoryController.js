@@ -12,7 +12,7 @@ createSubCategory : async (req,res) => {
         message :"created successfully",
         data: subCategory
     })
-    await categoryModel.findByIdAndUpdate(req.body.category,{$push:{subcategories:subCategory}})
+    await categoryModel.findByIdAndUpdate(req.body.category,{$push:{subcategories:subCategory._id}})
    } 
    catch {
     res.status(400).json ({

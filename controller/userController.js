@@ -18,9 +18,16 @@ module.exports = {
  verify : async (req, res) => {
     try {
         const verifyCode = await userModel.findOne({ code: req.params.code });
-        verifyCode.code = undefined;//supprimer
-        verifyCode.verify = true;
-        verifyCode.save();
+    if (!verifyCode) {
+            return res.sendFile(join(__dirname + "../../template/error.html"));
+        }
+
+      // Mise à jour sans déclencher `pre("save")`
+        await userModel.updateOne(
+            { _id: verifyCode._id },
+            { $unset: { code: "" }, $set: { verify: true } }
+        );
+        
         return res.sendFile(join(__dirname + "../../template/sucess.html"));
     } catch (err) {
 
