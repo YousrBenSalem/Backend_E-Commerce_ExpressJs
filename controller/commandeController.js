@@ -1,5 +1,6 @@
 const { response } = require("express")
 const commandeModel =require ("../model/commandeModel")
+const customerModel =require ("../model/customerModel")
 const orderModel = require("../model/orderModel")
 module.exports = {
 
@@ -15,7 +16,12 @@ module.exports = {
                 data: commande
     
             })
-            await orderModel.findByIdAndUpdate(req.body.order,{$push:{commande:commande}})
+          /*   await orderModel.findByIdAndUpdate(req.body.order,{$push:{commande:commande}}) */
+          for (const orderId of req.body.order) {
+    await orderModel.findByIdAndUpdate(orderId, { $push: { commande: commande._id } });
+}
+
+            await customerModel.findByIdAndUpdate(req.body.customer,{$push:{commande:commande}})
         }
         catch {
             res.status(400).json({

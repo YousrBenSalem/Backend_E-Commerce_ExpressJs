@@ -6,14 +6,11 @@ const orderSchema = new mongoose.Schema({
         type : mongoose.Types.ObjectId,
         ref : "commande"
     },
-    customers : [{
-        type : mongoose.Types.ObjectId,
-        ref:"customer"
-    }],
-    products : [{
+  
+    product : {
         type : mongoose.Types.ObjectId,
         ref: "product"
-    }],
+    },
     
 })
 module.exports=mongoose.model("order",orderSchema)

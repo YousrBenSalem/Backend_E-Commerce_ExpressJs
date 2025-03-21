@@ -18,28 +18,12 @@ createProduct: async (req, res) => {
         await product.save();
 
         // Stocke toutes les promesses dans un tableau
-        const updatePromises = [];
 
         // Mettre à jour la sous-catégorie
-        updatePromises.push(
-            subCategoryModel.findByIdAndUpdate(req.body.subCategory, { $push: { products: product } })
-        );
-
-        // Mettre à jour les fournisseurs
-        if (provider && provider.length > 0) {
-            for (const providerId of provider) {
-                if (typeof providerId !== "string" || !mongoose.Types.ObjectId.isValid(providerId)) {
-                    console.error(`Invalid ObjectId: ${providerId}`);
-                    continue;
-                }
-                updatePromises.push(
-                    providerModel.findByIdAndUpdate(providerId, { $push: { products: product._id } })
-                );
-            }
-        }
-
+            await subCategoryModel.findByIdAndUpdate({_id:req.body.subCategory}, { $push: { products: product._id } })
+            await  providerModel.findByIdAndUpdate( { _id: req.body.provider }, { $push: { products: product._id } })
+            
         // Attendre que toutes les mises à jour soient terminées
-        await Promise.all(updatePromises);
 
         // Maintenant, on peut envoyer la réponse
         res.status(200).json({
@@ -93,7 +77,7 @@ getProductById : async (req,res) => {
         res.status(200).json ({
             success:true,
             message:"product found",
-            date:product
+            data:product
         })
     }
     catch (error) {

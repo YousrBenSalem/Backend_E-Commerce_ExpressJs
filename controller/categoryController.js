@@ -24,7 +24,7 @@ module.exports = {
 
     getAllCategory: async (req, res) => {
         try {
-            const category = await categoryModel.find()
+            const category = await categoryModel.find().populate("subcategories")
             res.status(200).json({
                 success: true,
                 message: "category found",

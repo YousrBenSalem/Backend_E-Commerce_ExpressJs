@@ -75,9 +75,6 @@ login : async (req,res) => {
     }
 }, 
 
-
-
-
 forgetPassword : async (req,res) => {
     const {email} = req.body
     const user = await userModel.findOne({email})
@@ -105,7 +102,7 @@ else {
         to : user.email,
         subject : "sending emails",
         text : "test",
-        html:`<b> clic here to take your token</b>,<a href=http://localhost:3000/${generateAccessToken}>clic</a>`
+        html:`<b> clic here to take your token</b>,<a href=http://localhost:3001/${generateAccessToken}>click</a>`
     })
     res.status(200).json({
         success:true,
@@ -147,7 +144,15 @@ res.status(400).json({
     data:null
 })
     }
-}
+},
+
+ logout :(req, res) => {
+    const refreshtoken = req.body.token;
+    refreshTokens = refreshTokens.filter((token) => token !== refreshtoken);
+    res.status(200).json({
+        message: "Déconnexion réussie"
+    });
+},
 
 
 

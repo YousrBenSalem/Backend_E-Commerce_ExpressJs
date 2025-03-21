@@ -5,10 +5,10 @@ const customerSchema = new mongoose.Schema ({
     address : {type : String},
     city : {type : String} ,
     cin : {type : Number} ,
-    order : {
+    commande :[{
       type : mongoose.Types.ObjectId,
-      ref:"order"
-    }
+      ref:"commande"
+    }] 
 })
 
 userModel.discriminator("customer",customerSchema)

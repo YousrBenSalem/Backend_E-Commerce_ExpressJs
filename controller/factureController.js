@@ -15,7 +15,7 @@ module.exports = {
                 data: facture
     
             })
-            await commandeModel.findByIdAndUpdate(req.body.commande,{$push:{facture:facture}})
+            await commandeModel.findByIdAndUpdate({_id:req.body.commande},{$push:{facture:facture}})
         }
         catch (err) {
             res.status(400).json({

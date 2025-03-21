@@ -13,10 +13,10 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref:"subCategory"
     },
-    orders : [{
+    order : {
         type: mongoose.Types.ObjectId,
         ref : "order"
-    }],
+    },
     provider :{
         type: mongoose.Types.ObjectId,
         ref:"provider"

@@ -3,6 +3,9 @@ const env = require ("dotenv").config()
 const port = 3000 
 const app = express ()
 const connectDB = require ("./database")
+const cors = require("cors");
+app.use(cors()); 
+
 connectDB ()
 app.use(express.json())
 
@@ -39,7 +42,7 @@ const userRouter = require ("./router/userRouter")
 app.use("/user",userRouter)
 
 
-app.get('/:img',(req,res)=>{
+app.get('/storage/:img',(req,res)=>{
     res.sendFile(__dirname+"/storage/"+req.params.img)
 })
 

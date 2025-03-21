@@ -9,9 +9,13 @@ const commandeSchema = new mongoose.Schema({
         type : mongoose.Types.ObjectId,
         ref: "facture"
     },
-    order : {
+    order : [{
         type : mongoose.Types.ObjectId,
         ref:"order"
+    }],
+      customer : {
+        type : mongoose.Types.ObjectId,
+        ref:"customer"
     },
   
 

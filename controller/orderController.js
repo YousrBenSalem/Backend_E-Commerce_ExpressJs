@@ -1,7 +1,7 @@
 const {response} = require ("express")
 const orderModel = require ("../model/orderModel")
 const productModel = require("../model/productModel")
-const customerModel = require("../model/customerModel")
+
 module.exports = {
 
 createOrder : async (req,res) => {
@@ -15,12 +15,10 @@ createOrder : async (req,res) => {
         })
         
       //  await productModel.findByIdAndUpdate(req.body.product,{$push:{orders:Order}}) 
-      const productsId = req.body.products 
-      if (productsId && productsId.length>0){
-        for (const productId of productsId){
-            await productModel.findByIdAndUpdate({_id:productId},{$push:{orders:Order}})
-        }
-      }
+    
+            await productModel.findByIdAndUpdate(req.body.product,{$push:{order:Order}})
+      
+    
      
     }
     catch {

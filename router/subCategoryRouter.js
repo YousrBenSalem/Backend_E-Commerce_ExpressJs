@@ -8,6 +8,7 @@ route.get("/get",subCategoryController.getAllSubCategory)
 route.get("/get/:id",subCategoryController.getSubCategoryById)
 route.delete("/delete/:id",subCategoryController.deleteSubCategory)
 route.put("/update/:id",subCategoryController.updateSubCategory)
+route.get("/products/:id" , subCategoryController.getProductBySubCategory)
 
 
 
